@@ -12,7 +12,7 @@ export const ReportList = () => {
   );
 
   const renderItem = (report: ListRenderItemInfo<Report>): ReactElement => (
-    <ReportItem report={report.item} />
+    <ReportItem report={report.item} onSelect={() => {}} />
   );
 
   return (
