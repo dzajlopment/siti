@@ -1,11 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { Provider as PaperProvider, Text } from "react-native-paper";
+import { Provider as PaperProvider } from "react-native-paper";
+import { ReportListScreen } from "./features/reports/ReportListScreen";
 
 export default function App() {
   return (
     <PaperProvider>
       <NavigationContainer>
-        <Text>Hello, world</Text>
+        <ReportListScreen />
       </NavigationContainer>
     </PaperProvider>
   );
