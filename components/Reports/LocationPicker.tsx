@@ -1,8 +1,42 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Alert } from "react-native";
 import { Button } from "react-native-paper";
-
+import {
+	getCurrentPositionAsync,
+	useForegroundPermissions,
+	PermissionStatus,
+} from "expo-location";
 const LocationPicker = () => {
-	const getLocationHandler = () => {};
+	const [locationPermissionInformation, requestPermission] =
+		useForegroundPermissions();
+
+	const verifyPermissions = async () => {
+		if (locationPermissionInformation as PermissionStatus | null) {
+			const permissionResponse = await requestPermission();
+			return permissionResponse.granted;
+		}
+		if (
+			(locationPermissionInformation as PermissionStatus | null) ===
+			PermissionStatus.DENIED
+		) {
+			Alert.alert(
+				"Insufficient Permissions!",
+				"You need to grant location permissions to use this app."
+			);
+			return false;
+		}
+		return true;
+	};
+
+	const getLocationHandler = async () => {
+		const hasPermission = await verifyPermissions();
+
+		if (!hasPermission) {
+			return;
+		}
+
+		const location = await getCurrentPositionAsync();
+		console.log(location);
+	};
 
 	const pickOnMapHandler = () => {};
 
