@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-navigation/native": "^6.0.13",
+    "@react-navigation/native-stack": "^6.9.1",
     "@types/react-native-maps": "^0.24.2",
     "expo": "~46.0.13",
     "expo-location": "~14.3.0",
