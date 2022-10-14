@@ -3,7 +3,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "expo-status-bar";
 import { Provider as PaperProvider } from "react-native-paper";
-import LocationPicker from "./components/Reports/LocationPicker";
+import LocationPicker from "./components/ReportsForm/LocationPicker";
 import { ReportList } from "./features/reports/ReportList";
 import Map from "./screens/Map";
 
