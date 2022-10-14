@@ -7,7 +7,6 @@ import LocationPicker from "./components/Reports/LocationPicker";
 import Map from "./screens/Map";
 
 const Stack = createNativeStackNavigator();
-const BottomTabs = createBottomTabNavigator();
 
 export default function App() {
 	return (
@@ -16,7 +15,7 @@ export default function App() {
 			<PaperProvider>
 				<NavigationContainer>
 					<Stack.Navigator>
-						<Stack.Screen name="LocationPicker" component={LocationPicker} />
+						<Stack.Screen name="AddPlace" component={LocationPicker} />
 						<Stack.Screen name="Map" component={Map} />
 					</Stack.Navigator>
 				</NavigationContainer>
