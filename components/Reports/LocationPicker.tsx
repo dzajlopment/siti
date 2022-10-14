@@ -1,11 +1,17 @@
-import { View, StyleSheet, Alert } from "react-native";
-import { Button } from "react-native-paper";
+import { View, StyleSheet, Alert, Image } from "react-native";
+import { Button, Text } from "react-native-paper";
 import {
 	getCurrentPositionAsync,
 	useForegroundPermissions,
 	PermissionStatus,
 } from "expo-location";
+import { useState } from "react";
+import { getMapPreview } from "../../util/location";
 const LocationPicker = () => {
+	const [pickedLocation, setPickedLocation] = useState<
+		undefined | { lat: number; lng: number }
+	>(undefined);
+
 	const [locationPermissionInformation, requestPermission] =
 		useForegroundPermissions();
 
@@ -35,14 +41,30 @@ const LocationPicker = () => {
 		}
 
 		const location = await getCurrentPositionAsync();
-		console.log(location);
+		setPickedLocation({
+			lat: location.coords.latitude,
+			lng: location.coords.longitude,
+		});
 	};
 
 	const pickOnMapHandler = () => {};
 
+	let locationPreview = <Text>No location picked yet.</Text>;
+
+	if (pickedLocation) {
+		locationPreview = (
+			<Image
+				style={styles.image}
+				source={{
+					uri: getMapPreview(pickedLocation?.lat, pickedLocation?.lng),
+				}}
+			/>
+		);
+	}
+
 	return (
 		<View>
-			<View style={styles.mapPreview}></View>
+			<View style={styles.mapPreview}>{locationPreview}</View>
 			<View>
 				<Button mode="contained" onPress={getLocationHandler}>
 					Locate User
@@ -64,5 +86,9 @@ const styles = StyleSheet.create({
 		height: 200,
 		justifyContent: "center",
 		alignItems: "center",
+	},
+	image: {
+		width: "100%",
+		height: "100%",
 	},
 });
