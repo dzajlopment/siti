@@ -8,7 +8,7 @@ const ReportForm = () => {
 	return (
 		<ScrollView>
 			<ImagePicker />
-			<TextInput label="Password" />
+
 			<LocationPicker />
 		</ScrollView>
 	);
