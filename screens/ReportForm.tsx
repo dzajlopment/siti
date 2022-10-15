@@ -2,6 +2,7 @@ import { View, ScrollView, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ImagePicker from "../components/ReportsForm/ImagePicker";
 import LocationPicker from "../components/ReportsForm/LocationPicker";
+import TextArea from "../components/ReportsForm/TextArea";
 import TitleInput from "../components/ReportsForm/TitleInput";
 
 const ReportForm = () => {
@@ -9,6 +10,7 @@ const ReportForm = () => {
 		<ScrollView style={styles.container}>
 			<ImagePicker />
 			<TitleInput />
+			<TextArea />
 			<LocationPicker />
 		</ScrollView>
 	);

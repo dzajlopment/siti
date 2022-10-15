@@ -92,12 +92,12 @@ const LocationPicker = () => {
 				<View style={styles.mapPreview}>{locationPreview}</View>
 			</View>
 			<View>
-				<Button mode="contained" onPress={getLocationHandler}>
+				{/* <Button mode="contained" onPress={getLocationHandler}>
 					Locate User
 				</Button>
 				<Button mode="contained" onPress={pickOnMapHandler}>
 					Pick on Map
-				</Button>
+				</Button> */}
 			</View>
 		</View>
 	);
@@ -107,24 +107,25 @@ export default LocationPicker;
 
 const styles = StyleSheet.create({
 	mapPreview: {
-		height: 190,
+		height: 150,
 		justifyContent: "center",
 		alignItems: "center",
 		flex: 1,
 		marginLeft: 12,
-		borderRadius: 5,
+		borderRadius: 8,
 		backgroundColor: "#fff",
+		marginTop: -10,
 	},
 	image: {
 		height: "100%",
 		width: "100%",
-		borderRadius: 5,
+		borderRadius: 8,
 	},
 	mapContainer: {
 		flexDirection: "row",
 		width: "100%",
 	},
 	container: {
-		marginTop: 10,
+		marginTop: 20,
 	},
 });

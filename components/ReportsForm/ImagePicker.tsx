@@ -6,7 +6,7 @@ import {
 import { useState } from "react";
 import { View, Alert, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Button, Text } from "react-native-paper";
+import { Button } from "react-native-paper";
 import Icons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const ImagePicker = () => {
@@ -46,8 +46,8 @@ const ImagePicker = () => {
 		setPickedImage((image as any).uri);
 	};
 
-	let imagePreview = <Text style={styles.text}>No image taken yet.</Text>;
-
+	// let imagePreview = <Text style={styles.text}>No image taken yet.</Text>;
+	let imagePreview = null;
 	if (pickedImage) {
 		imagePreview = <Image style={styles.image} source={{ uri: pickedImage }} />;
 	}
@@ -73,7 +73,7 @@ const ImagePicker = () => {
 const styles = StyleSheet.create({
 	imagePreview: {
 		width: "100%",
-		height: 160,
+		height: 150,
 
 		justifyContent: "center",
 		alignItems: "center",
