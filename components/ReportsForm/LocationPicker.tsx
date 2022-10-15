@@ -1,4 +1,4 @@
-import { View, StyleSheet, Alert, Image } from "react-native";
+import { View, StyleSheet, Alert, Image, TouchableOpacity } from "react-native";
 import { Button, Text } from "react-native-paper";
 import {
 	getCurrentPositionAsync,
@@ -13,6 +13,7 @@ import {
 	useIsFocused,
 } from "@react-navigation/native";
 import Icons from "@expo/vector-icons/Ionicons";
+import Icon from "@expo/vector-icons/MaterialIcons";
 
 const LocationPicker = () => {
 	const [pickedLocation, setPickedLocation] = useState<
@@ -72,16 +73,22 @@ const LocationPicker = () => {
 		navigation.navigate("Map" as never);
 	};
 
-	let locationPreview = <Text>No location picked yet.</Text>;
+	let locationPreview = null;
 
 	if (pickedLocation) {
 		locationPreview = (
-			<Image
+			<TouchableOpacity
+				activeOpacity={0.8}
 				style={styles.image}
-				source={{
-					uri: getMapPreview(pickedLocation?.lat, pickedLocation?.lng),
-				}}
-			/>
+				onPress={pickOnMapHandler}
+			>
+				<Image
+					style={styles.image}
+					source={{
+						uri: getMapPreview(pickedLocation?.lat, pickedLocation?.lng),
+					}}
+				/>
+			</TouchableOpacity>
 		);
 	}
 
@@ -89,15 +96,17 @@ const LocationPicker = () => {
 		<View style={styles.container}>
 			<View style={styles.mapContainer}>
 				<Icons name="md-location-outline" size={24} color="#201f23" />
-				<View style={styles.mapPreview}>{locationPreview}</View>
-			</View>
-			<View>
-				{/* <Button mode="contained" onPress={getLocationHandler}>
-					Locate User
-				</Button>
-				<Button mode="contained" onPress={pickOnMapHandler}>
-					Pick on Map
-				</Button> */}
+				<View style={styles.mapPreview}>
+					{locationPreview}
+
+					<Icon
+						onPress={getLocationHandler}
+						name="my-location"
+						size={22}
+						style={styles.button}
+						color="#201f23"
+					/>
+				</View>
 			</View>
 		</View>
 	);
@@ -107,7 +116,7 @@ export default LocationPicker;
 
 const styles = StyleSheet.create({
 	mapPreview: {
-		height: 150,
+		height: 180,
 		justifyContent: "center",
 		alignItems: "center",
 		flex: 1,
@@ -115,6 +124,7 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		backgroundColor: "#fff",
 		marginTop: -10,
+		position: "relative",
 	},
 	image: {
 		height: "100%",
@@ -128,5 +138,14 @@ const styles = StyleSheet.create({
 	container: {
 		marginTop: 20,
 		marginBottom: 10,
+	},
+	button: {
+		backgroundColor: "#e8def8",
+		padding: 8,
+		borderRadius: 13,
+		elevation: 4,
+		position: "absolute",
+		bottom: 15,
+		right: 15,
 	},
 });
