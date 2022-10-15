@@ -12,6 +12,8 @@ import {
 	useRoute,
 	useIsFocused,
 } from "@react-navigation/native";
+import Icons from "@expo/vector-icons/Ionicons";
+
 const LocationPicker = () => {
 	const [pickedLocation, setPickedLocation] = useState<
 		undefined | { lat: number; lng: number }
@@ -84,8 +86,11 @@ const LocationPicker = () => {
 	}
 
 	return (
-		<View>
-			<View style={styles.mapPreview}>{locationPreview}</View>
+		<View style={styles.container}>
+			<View style={styles.mapContainer}>
+				<Icons name="md-location-outline" size={24} />
+				<View style={styles.mapPreview}>{locationPreview}</View>
+			</View>
 			<View>
 				<Button mode="contained" onPress={getLocationHandler}>
 					Locate User
@@ -102,14 +107,24 @@ export default LocationPicker;
 
 const styles = StyleSheet.create({
 	mapPreview: {
-		marginVertical: 8,
-		width: "100%",
-		height: 200,
+		height: 190,
 		justifyContent: "center",
 		alignItems: "center",
+		flex: 1,
+		marginLeft: 12,
+		borderRadius: 5,
+		backgroundColor: "#fff",
 	},
 	image: {
-		width: "100%",
 		height: "100%",
+		width: "100%",
+		borderRadius: 5,
+	},
+	mapContainer: {
+		flexDirection: "row",
+		width: "100%",
+	},
+	container: {
+		marginTop: 10,
 	},
 });
