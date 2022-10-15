@@ -2,7 +2,8 @@ import { Alert, StyleSheet } from "react-native";
 import { useLayoutEffect, useCallback } from "react";
 import MapView, { MapEvent, Marker } from "react-native-maps";
 import { useState } from "react";
-import { IconButton } from "react-native-paper";
+import Icons from "@expo/vector-icons/Ionicons";
+
 const Map = ({ navigation }: any) => {
 	const [selectedLocation, setSelectedLocation] = useState<
 		undefined | { lat: number; lng: number }
@@ -38,13 +39,7 @@ const Map = ({ navigation }: any) => {
 	useLayoutEffect(() => {
 		navigation.setOptions({
 			headerRight: () => (
-				<IconButton
-					icon={{
-						uri: "https://avatars0.githubusercontent.com/u/17571969?v=3&s=400",
-					}}
-					size={24}
-					onPress={savePickedLocationHandler}
-				/>
+				<Icons name="checkmark" size={24} onPress={savePickedLocationHandler} />
 			),
 		});
 	}, [navigation, savePickedLocationHandler]);
