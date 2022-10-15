@@ -88,7 +88,7 @@ const LocationPicker = () => {
 	return (
 		<View style={styles.container}>
 			<View style={styles.mapContainer}>
-				<Icons name="md-location-outline" size={24} />
+				<Icons name="md-location-outline" size={24} color="#201f23" />
 				<View style={styles.mapPreview}>{locationPreview}</View>
 			</View>
 			<View>

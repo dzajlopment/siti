@@ -73,7 +73,7 @@ const ImagePicker = () => {
 const styles = StyleSheet.create({
 	imagePreview: {
 		width: "100%",
-		height: 150,
+		height: 170,
 
 		justifyContent: "center",
 		alignItems: "center",
