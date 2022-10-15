@@ -1,4 +1,4 @@
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ImagePicker from "../components/ReportsForm/ImagePicker";
 import LocationPicker from "../components/ReportsForm/LocationPicker";
@@ -6,7 +6,7 @@ import TitleInput from "../components/ReportsForm/TitleInput";
 
 const ReportForm = () => {
 	return (
-		<ScrollView>
+		<ScrollView style={styles.container}>
 			<ImagePicker />
 			<TitleInput />
 			<LocationPicker />
@@ -15,3 +15,9 @@ const ReportForm = () => {
 };
 
 export default ReportForm;
+
+const styles = StyleSheet.create({
+	container: {
+		paddingHorizontal: 13,
+	},
+});

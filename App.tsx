@@ -16,7 +16,11 @@ function Home() {
 	return (
 		<BottomTab.Navigator>
 			<BottomTab.Screen name="Reports" component={ReportList} />
-			<BottomTab.Screen name="Add Report" component={ReportForm} />
+			<BottomTab.Screen
+				options={{ headerShown: false }}
+				name="Add Report"
+				component={ReportForm}
+			/>
 		</BottomTab.Navigator>
 	);
 }
@@ -35,7 +39,11 @@ export default function App() {
 								component={Home}
 							/>
 							<Stack.Screen name="Map" component={Map} />
-							<Stack.Screen name="ReportForm" component={ReportForm} />
+							<Stack.Screen
+								options={{ headerShown: false }}
+								name="ReportForm"
+								component={ReportForm}
+							/>
 						</Stack.Navigator>
 					</NavigationContainer>
 				</PaperProvider>
