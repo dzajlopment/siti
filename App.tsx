@@ -6,22 +6,40 @@ import { Provider as PaperProvider } from "react-native-paper";
 import LocationPicker from "./components/ReportsForm/LocationPicker";
 import { ReportList } from "./features/reports/ReportList";
 import Map from "./screens/Map";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import ReportForm from "./screens/ReportForm";
 
 const Stack = createNativeStackNavigator();
+const BottomTab = createBottomTabNavigator();
+
+function Home() {
+	return (
+		<BottomTab.Navigator>
+			<BottomTab.Screen name="Reports" component={ReportList} />
+			<BottomTab.Screen name="Add Report" component={ReportForm} />
+		</BottomTab.Navigator>
+	);
+}
 
 export default function App() {
 	return (
 		<>
 			<StatusBar style="dark" />
-			<PaperProvider>
-				<NavigationContainer>
-					<Stack.Navigator initialRouteName="ReportList">
-						<Stack.Screen name="ReportList" component={ReportList} />
-						<Stack.Screen name="AddPlace" component={LocationPicker} />
-						<Stack.Screen name="Map" component={Map} />
-					</Stack.Navigator>
-				</NavigationContainer>
-			</PaperProvider>
+			<SafeAreaProvider>
+				<PaperProvider>
+					<NavigationContainer>
+						<Stack.Navigator initialRouteName="Home">
+							<Stack.Screen
+								name="Home"
+								options={{ headerShown: false }}
+								component={Home}
+							/>
+							<Stack.Screen name="Map" component={Map} />
+							<Stack.Screen name="ReportForm" component={ReportForm} />
+						</Stack.Navigator>
+					</NavigationContainer>
+				</PaperProvider>
+			</SafeAreaProvider>
 		</>
 	);
 }

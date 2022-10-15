@@ -29,7 +29,7 @@ const Map = ({ navigation }: any) => {
 			return;
 		}
 
-		navigation.navigate("AddPlace", {
+		navigation.navigate("ReportForm", {
 			pickedLat: selectedLocation.lat,
 			pickedLng: selectedLocation.lng,
 		});
