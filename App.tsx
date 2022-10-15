@@ -8,6 +8,7 @@ import { ReportList } from "./features/reports/ReportList";
 import Map from "./screens/Map";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import ReportForm from "./screens/ReportForm";
+import Icons from "@expo/vector-icons/Ionicons";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -15,9 +16,22 @@ const BottomTab = createBottomTabNavigator();
 function Home() {
 	return (
 		<BottomTab.Navigator>
-			<BottomTab.Screen name="Reports" component={ReportList} />
 			<BottomTab.Screen
-				options={{ headerShown: false }}
+				options={{
+					tabBarIcon({ color, size }) {
+						return <Icons name="list-outline" color={color} size={size} />;
+					},
+				}}
+				name="Reports"
+				component={ReportList}
+			/>
+			<BottomTab.Screen
+				options={{
+					headerShown: false,
+					tabBarIcon({ color, size }) {
+						return <Icons name="add" color={color} size={size} />;
+					},
+				}}
 				name="Add Report"
 				component={ReportForm}
 			/>
