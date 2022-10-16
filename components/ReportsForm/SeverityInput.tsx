@@ -2,7 +2,7 @@ import { StyleSheet, View } from "react-native";
 import { List } from "react-native-paper";
 import Icons from "@expo/vector-icons/MaterialCommunityIcons";
 
-const SeverityInput = () => {
+const SeverityInput = ({ onUpdate, value }: any) => {
 	return (
 		<View style={styles.container}>
 			<Icons name="toothbrush" size={24} style={styles.icon} color="#201f23" />

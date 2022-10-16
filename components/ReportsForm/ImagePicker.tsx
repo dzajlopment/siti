@@ -3,15 +3,12 @@ import {
 	useCameraPermissions,
 	PermissionStatus,
 } from "expo-image-picker";
-import { useState } from "react";
 import { View, Alert, Image, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button } from "react-native-paper";
 import Icons from "@expo/vector-icons/MaterialCommunityIcons";
 
-const ImagePicker = () => {
-	const [pickedImage, setPickedImage] = useState("");
-
+const ImagePicker = ({ onUpdate, value }: any) => {
 	const [cameraPermissionInformation, requestPermission] =
 		useCameraPermissions();
 
@@ -43,16 +40,14 @@ const ImagePicker = () => {
 		const image = await launchCameraAsync({
 			quality: 0.5,
 		});
-		setPickedImage((image as any).uri);
+		onUpdate((image as any).uri);
 	};
 
 	// let imagePreview = <Text style={styles.text}>No image taken yet.</Text>;
 	let imagePreview = null;
-	if (pickedImage) {
-		imagePreview = <Image style={styles.image} source={{ uri: pickedImage }} />;
+	if (value) {
+		imagePreview = <Image style={styles.image} source={{ uri: value }} />;
 	}
-
-	console.log(pickedImage);
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -90,8 +85,8 @@ const styles = StyleSheet.create({
 		height: "100%",
 	},
 	container: {
-		marginTop: 20,
 		marginBottom: 15,
+		marginLeft: 28,
 	},
 	text: {
 		color: "#948ba3",

@@ -1,10 +1,8 @@
-import { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Text, TextInput } from "react-native-paper";
 import Icons from "@expo/vector-icons/Ionicons";
 
-const TitleInput = () => {
-	const [text, setText] = useState("");
+const TitleInput = ({ onUpdate, value }: any) => {
 	return (
 		<View>
 			<View style={styles.inputContainer}>
@@ -13,14 +11,16 @@ const TitleInput = () => {
 					style={styles.input}
 					label="What happend?"
 					mode="outlined"
-					value={text}
-					onChangeText={(text) => setText(text)}
+					value={value}
+					onChangeText={(text) => {
+						onUpdate(text);
+					}}
 					maxLength={65}
 				/>
 			</View>
 
 			<Text variant="labelSmall" style={styles.maxLength}>
-				{text.length}/65
+				{value.length}/65
 			</Text>
 		</View>
 	);

@@ -4,7 +4,7 @@ import MapView, { MapEvent, Marker } from "react-native-maps";
 import { useState } from "react";
 import Icons from "@expo/vector-icons/Ionicons";
 
-const Map = ({ navigation }: any) => {
+const Map = ({ navigation }: { navigation: any }) => {
 	const [selectedLocation, setSelectedLocation] = useState<
 		undefined | { lat: number; lng: number }
 	>();
@@ -30,7 +30,8 @@ const Map = ({ navigation }: any) => {
 			return;
 		}
 
-		navigation.navigate("ReportForm", {
+		navigation.navigate("Home", {
+			screen: "Add Report",
 			pickedLat: selectedLocation.lat,
 			pickedLng: selectedLocation.lng,
 		});

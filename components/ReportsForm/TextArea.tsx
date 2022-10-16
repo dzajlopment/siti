@@ -1,9 +1,6 @@
 import { TextInput } from "react-native-paper";
 import { StyleSheet } from "react-native";
-import { useState } from "react";
-const TextArea = () => {
-	const [text, setText] = useState("");
-
+const TextArea = ({ onUpdate, value }: any) => {
 	return (
 		<TextInput
 			style={styles.textArea}
@@ -11,8 +8,8 @@ const TextArea = () => {
 			mode="outlined"
 			label="Description (optional)"
 			numberOfLines={4}
-			onChangeText={(text) => setText(text)}
-			value={text}
+			onChangeText={(text) => onUpdate(text)}
+			value={value}
 		/>
 	);
 };

@@ -1,5 +1,4 @@
 import { View, StyleSheet, Alert, Image, TouchableOpacity } from "react-native";
-import { Button, Text } from "react-native-paper";
 import {
 	getCurrentPositionAsync,
 	useForegroundPermissions,
@@ -15,10 +14,7 @@ import {
 import Icons from "@expo/vector-icons/Ionicons";
 import Icon from "@expo/vector-icons/MaterialIcons";
 
-const LocationPicker = () => {
-	const [pickedLocation, setPickedLocation] = useState<
-		undefined | { lat: number; lng: number }
-	>(undefined);
+const LocationPicker = ({ onUpdate, value }: any) => {
 	const isFocused = useIsFocused();
 
 	const navigation = useNavigation();
@@ -33,7 +29,7 @@ const LocationPicker = () => {
 				lat: (route.params as any).pickedLat,
 				lng: (route.params as any).pickedLng,
 			};
-			setPickedLocation(mapPickedLocation);
+			onUpdate(mapPickedLocation);
 		}
 	}, [route, isFocused]);
 
@@ -63,7 +59,7 @@ const LocationPicker = () => {
 		}
 
 		const location = await getCurrentPositionAsync();
-		setPickedLocation({
+		onUpdate({
 			lat: location.coords.latitude,
 			lng: location.coords.longitude,
 		});
@@ -75,7 +71,7 @@ const LocationPicker = () => {
 
 	let locationPreview = null;
 
-	if (pickedLocation) {
+	if (value) {
 		locationPreview = (
 			<TouchableOpacity
 				activeOpacity={0.8}
@@ -85,7 +81,7 @@ const LocationPicker = () => {
 				<Image
 					style={styles.image}
 					source={{
-						uri: getMapPreview(pickedLocation?.lat, pickedLocation?.lng),
+						uri: getMapPreview(value?.lat, value?.lng),
 					}}
 				/>
 			</TouchableOpacity>

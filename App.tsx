@@ -9,6 +9,7 @@ import Map from "./screens/Map";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import ReportForm from "./screens/ReportForm";
 import Icons from "@expo/vector-icons/Ionicons";
+import { Text } from "react-native";
 
 const Stack = createNativeStackNavigator();
 const BottomTab = createBottomTabNavigator();
@@ -27,10 +28,10 @@ function Home() {
 			/>
 			<BottomTab.Screen
 				options={{
-					headerShown: false,
 					tabBarIcon({ color, size }) {
 						return <Icons name="add" color={color} size={size} />;
 					},
+					headerShown: false,
 				}}
 				name="Add Report"
 				component={ReportForm}
@@ -54,9 +55,9 @@ export default function App() {
 							/>
 							<Stack.Screen name="Map" component={Map} />
 							<Stack.Screen
-								options={{ headerShown: false }}
 								name="ReportForm"
 								component={ReportForm}
+								options={{ headerShown: false }}
 							/>
 						</Stack.Navigator>
 					</NavigationContainer>
