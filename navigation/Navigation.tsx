@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { ReportList } from "../features/reports/ReportList";
 import Icons from "@expo/vector-icons/Ionicons";
 import ReportForm from "../screens/ReportForm";
 import Map from "../screens/Map";
+import AllReports from "../screens/AllReports";
 
 const Navigation = () => {
 	const Stack = createNativeStackNavigator();
@@ -20,7 +20,7 @@ const Navigation = () => {
 						},
 					}}
 					name="Reports"
-					component={ReportList}
+					component={AllReports}
 				/>
 				<BottomTab.Screen
 					options={{
