@@ -66,7 +66,7 @@ const LocationPicker = ({ onUpdate, value }: any) => {
 	};
 
 	const pickOnMapHandler = () => {
-		navigation.navigate("Map" as never);
+		(navigation as any).push("Map");
 	};
 
 	let locationPreview = null;
