@@ -3,7 +3,6 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ReportList } from "../features/reports/ReportList";
 import Icons from "@expo/vector-icons/Ionicons";
-import { Button } from "react-native-paper";
 import ReportForm from "../screens/ReportForm";
 import Map from "../screens/Map";
 
@@ -25,9 +24,11 @@ const Navigation = () => {
 				/>
 				<BottomTab.Screen
 					options={{
-						headerShown: false,
 						tabBarIcon({ color, size }) {
 							return <Icons name="add" color={color} size={size} />;
+						},
+						tabBarStyle: {
+							display: "none",
 						},
 					}}
 					name="Add Report"
