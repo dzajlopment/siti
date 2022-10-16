@@ -55,7 +55,7 @@ export default function App() {
 							/>
 							<Stack.Screen name="Map" component={Map} />
 							<Stack.Screen
-								name="ReportForm"
+								name="Add Report"
 								component={ReportForm}
 								options={{ headerShown: false }}
 							/>

@@ -9,8 +9,10 @@ import TitleInput from "../components/ReportsForm/TitleInput";
 import Icons from "@expo/vector-icons/AntDesign";
 import validateForm from "../util/validateForm";
 import axios from "axios";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
-const ReportForm = () => {
+const ReportForm = ({ navigation }: any) => {
+	const route = useRoute();
 	const [photo, setPhoto] = useState("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
@@ -19,6 +21,7 @@ const ReportForm = () => {
 		undefined | { lat: number; lng: number }
 	>(undefined);
 	({ lat: null, lng: null });
+	console.log(route);
 
 	const submitHandler = async (event: any) => {
 		event.preventDefault();

@@ -30,8 +30,7 @@ const Map = ({ navigation }: { navigation: any }) => {
 			return;
 		}
 
-		navigation.navigate("Home", {
-			screen: "Add Report",
+		navigation.navigate("Add Report", {
 			pickedLat: selectedLocation.lat,
 			pickedLng: selectedLocation.lng,
 		});
