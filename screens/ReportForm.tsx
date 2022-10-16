@@ -40,6 +40,8 @@ const ReportForm = ({ navigation }: any) => {
 				location,
 			})
 		) {
+			setAlertText("Some data is missing!");
+			setIsVisible(true);
 			return;
 		}
 
@@ -52,7 +54,6 @@ const ReportForm = ({ navigation }: any) => {
 				location,
 			})
 			.catch((err) => console.log(err));
-
 		if (response?.status === 200 || response?.status === 201) {
 			setAlertText("Report sent successfully.");
 			setIsVisible(true);
