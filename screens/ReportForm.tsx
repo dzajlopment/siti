@@ -9,8 +9,7 @@ import TitleInput from "../components/ReportsForm/TitleInput";
 import Icons from "@expo/vector-icons/AntDesign";
 import validateForm from "../util/validateForm";
 import axios from "axios";
-import { useRoute } from "@react-navigation/native";
-import { Button, Text } from "react-native-paper";
+import { Button, Snackbar } from "react-native-paper";
 
 const ReportForm = ({ navigation }: any) => {
 	const [photo, setPhoto] = useState("");
@@ -21,6 +20,8 @@ const ReportForm = ({ navigation }: any) => {
 		undefined | { lat: number; lng: number }
 	>(undefined);
 	({ lat: null, lng: null });
+	const [isVisible, setIsVisible] = useState(false);
+	const [alertText, setAlertText] = useState("");
 
 	const clearInputs = () => {
 		setPhoto("");
@@ -31,16 +32,16 @@ const ReportForm = ({ navigation }: any) => {
 	};
 
 	const submitHandler = async () => {
-		// if (
-		// 	!validateForm({
-		// 		image: photo,
-		// 		title,
-		// 		severity,
-		// 		location,
-		// 	})
-		// ) {
-		// 	return;
-		// }
+		if (
+			!validateForm({
+				image: photo,
+				title,
+				severity,
+				location,
+			})
+		) {
+			return;
+		}
 
 		const response = await axios
 			.post("http://localhost:3000/api/v1/reports", {
@@ -53,14 +54,16 @@ const ReportForm = ({ navigation }: any) => {
 			.catch((err) => console.log(err));
 
 		if (response?.status === 200 || response?.status === 201) {
-			// TODO: notify user
+			setAlertText("Report sent successfully.");
+			setIsVisible(true);
 			clearInputs();
 			if (navigation.canGoBack()) {
 				navigation.goBack();
 			}
 			return;
 		}
-		// TODO: notify user
+		setAlertText("Couldn't send report. Please try again later!");
+		setIsVisible(true);
 	};
 
 	useLayoutEffect(() => {
@@ -70,6 +73,7 @@ const ReportForm = ({ navigation }: any) => {
 					name="close"
 					size={24}
 					onPress={() => {
+						clearInputs();
 						navigation.goBack();
 					}}
 					style={styles.topButtonLeft}
@@ -95,6 +99,15 @@ const ReportForm = ({ navigation }: any) => {
 				<TextArea onUpdate={setDescription} value={description} />
 				<SeverityInput onUpdate={setSeverity} value={severity} />
 				<LocationPicker onUpdate={setLocation} value={location} />
+				<Snackbar
+					duration={3000}
+					onDismiss={() => {
+						setIsVisible(false);
+					}}
+					visible={isVisible}
+				>
+					{alertText}
+				</Snackbar>
 			</SafeAreaView>
 		</ScrollView>
 	);

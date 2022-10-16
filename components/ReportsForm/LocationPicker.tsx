@@ -73,18 +73,12 @@ const LocationPicker = ({ onUpdate, value }: any) => {
 
 	if (value) {
 		locationPreview = (
-			<TouchableOpacity
-				activeOpacity={0.8}
+			<Image
 				style={styles.image}
-				onPress={pickOnMapHandler}
-			>
-				<Image
-					style={styles.image}
-					source={{
-						uri: getMapPreview(value?.lat, value?.lng),
-					}}
-				/>
-			</TouchableOpacity>
+				source={{
+					uri: getMapPreview(value?.lat, value?.lng),
+				}}
+			/>
 		);
 	}
 
@@ -92,9 +86,12 @@ const LocationPicker = ({ onUpdate, value }: any) => {
 		<View style={styles.container}>
 			<View style={styles.mapContainer}>
 				<Icons name="md-location-outline" size={24} color="#201f23" />
-				<View style={styles.mapPreview}>
+				<TouchableOpacity
+					style={styles.mapPreview}
+					onPress={pickOnMapHandler}
+					activeOpacity={0.9}
+				>
 					{locationPreview}
-
 					<Icon
 						onPress={getLocationHandler}
 						name="my-location"
@@ -102,7 +99,7 @@ const LocationPicker = ({ onUpdate, value }: any) => {
 						style={styles.button}
 						color="#201f23"
 					/>
-				</View>
+				</TouchableOpacity>
 			</View>
 		</View>
 	);
