@@ -1,6 +1,6 @@
 import { StyleSheet, View } from "react-native";
 import { useState } from "react";
-import Icons from "@expo/vector-icons/MaterialCommunityIcons";
+import Icons from "@expo/vector-icons/MaterialIcons";
 import DropDown from "react-native-paper-dropdown";
 
 const SeverityInput = ({ onUpdate, value }: any) => {
@@ -23,7 +23,12 @@ const SeverityInput = ({ onUpdate, value }: any) => {
 
 	return (
 		<View style={styles.container}>
-			<Icons name="toothbrush" size={24} style={styles.icon} color="#201f23" />
+			<Icons
+				name="signal-cellular-null"
+				size={24}
+				style={styles.icon}
+				color="#201f23"
+			/>
 			<View style={styles.dropDownContainer}>
 				<DropDown
 					dropDownStyle={styles.list}
