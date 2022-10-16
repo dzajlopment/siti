@@ -82,8 +82,9 @@ const styles = StyleSheet.create({
 		height: "100%",
 	},
 	container: {
-		marginBottom: 15,
+		marginBottom: 10,
 		marginLeft: 28,
+		marginTop: -1,
 	},
 	text: {
 		color: "#948ba3",

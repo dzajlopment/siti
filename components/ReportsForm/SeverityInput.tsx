@@ -1,17 +1,42 @@
 import { StyleSheet, View } from "react-native";
-import { List } from "react-native-paper";
+import { useState } from "react";
 import Icons from "@expo/vector-icons/MaterialCommunityIcons";
+import DropDown from "react-native-paper-dropdown";
 
 const SeverityInput = ({ onUpdate, value }: any) => {
+	const [isVisible, setIsVisible] = useState(false);
+
+	const options = [
+		{
+			label: "Low",
+			value: "low",
+		},
+		{
+			label: "Medium",
+			value: "medium",
+		},
+		{
+			label: "High",
+			value: "high",
+		},
+	];
+
 	return (
 		<View style={styles.container}>
 			<Icons name="toothbrush" size={24} style={styles.icon} color="#201f23" />
-			<List.Section style={styles.list}>
-				<List.Accordion title="Severity">
-					<List.Item title="First item" />
-					<List.Item title="Second item" />
-				</List.Accordion>
-			</List.Section>
+			<View style={styles.dropDownContainer}>
+				<DropDown
+					dropDownStyle={styles.list}
+					label="Severity"
+					mode="outlined"
+					visible={isVisible}
+					showDropDown={() => setIsVisible(true)}
+					onDismiss={() => setIsVisible(false)}
+					value={value}
+					setValue={onUpdate}
+					list={options}
+				/>
+			</View>
 		</View>
 	);
 };
@@ -25,10 +50,13 @@ const styles = StyleSheet.create({
 		marginTop: 8,
 	},
 	list: {
-		marginLeft: 12,
-		flex: 1,
+		width: "100%",
 	},
 	icon: {
 		marginTop: 24,
+	},
+	dropDownContainer: {
+		flex: 1,
+		marginLeft: 12,
 	},
 });

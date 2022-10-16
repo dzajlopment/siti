@@ -15,7 +15,7 @@ const ReportForm = ({ navigation }: any) => {
 	const [photo, setPhoto] = useState("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
-	const [severity, setSeverity] = useState("c");
+	const [severity, setSeverity] = useState("");
 	const [location, setLocation] = useState<
 		undefined | { lat: number; lng: number }
 	>(undefined);

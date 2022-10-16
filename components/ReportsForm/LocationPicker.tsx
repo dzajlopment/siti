@@ -4,7 +4,7 @@ import {
 	useForegroundPermissions,
 	PermissionStatus,
 } from "expo-location";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { getMapPreview } from "../../util/location";
 import {
 	useNavigation,
