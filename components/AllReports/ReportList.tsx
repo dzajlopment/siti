@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { ReactElement } from "react";
 import { FlatList, ListRenderItemInfo, StyleSheet, View } from "react-native";
 import { Button, Text } from "react-native-paper";
@@ -6,9 +7,13 @@ import { ReportItem } from "./ReportItem";
 
 export const ReportList = () => {
 	const reports: Report[] = [];
-
+	const navigation = useNavigation();
 	const renderListHeader = (): ReactElement => (
-		<Button mode="contained" style={styles.header}>
+		<Button
+			mode="contained"
+			style={styles.header}
+			onPress={() => navigation.navigate("Add Report" as never)}
+		>
 			New report
 		</Button>
 	);
