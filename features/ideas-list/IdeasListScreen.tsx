@@ -7,7 +7,7 @@ export const IdeasListScreen = (props: { navigation: any }) => {
   const [ideas, setIdeas] = useState<Idea[]>([]);
 
   const handleNewIdeaPressed = () => {
-    navigation.push();
+    navigation.push("NewIdea");
   };
 
   return (
