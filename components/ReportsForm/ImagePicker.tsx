@@ -4,8 +4,7 @@ import {
 	PermissionStatus,
 } from "expo-image-picker";
 import { View, Alert, Image, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Button } from "react-native-paper";
+import { Button, Text } from "react-native-paper";
 import Icons from "@expo/vector-icons/MaterialCommunityIcons";
 
 const ImagePicker = ({ onUpdate, value }: any) => {
@@ -43,14 +42,12 @@ const ImagePicker = ({ onUpdate, value }: any) => {
 		onUpdate((image as any).uri);
 	};
 
-	// let imagePreview = <Text style={styles.text}>No image taken yet.</Text>;
 	let imagePreview = null;
 	if (value) {
 		imagePreview = <Image style={styles.image} source={{ uri: value }} />;
 	}
-
 	return (
-		<SafeAreaView style={styles.container}>
+		<View style={styles.container}>
 			<View style={styles.imagePreview}>{imagePreview}</View>
 			<Button
 				style={styles.button}
@@ -61,7 +58,7 @@ const ImagePicker = ({ onUpdate, value }: any) => {
 			>
 				Take a picture
 			</Button>
-		</SafeAreaView>
+		</View>
 	);
 };
 

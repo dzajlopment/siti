@@ -1,5 +1,5 @@
 import { useLayoutEffect, useState } from "react";
-import { View, ScrollView, StyleSheet, Button } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import ImagePicker from "../components/ReportsForm/ImagePicker";
 import LocationPicker from "../components/ReportsForm/LocationPicker";
@@ -9,10 +9,10 @@ import TitleInput from "../components/ReportsForm/TitleInput";
 import Icons from "@expo/vector-icons/AntDesign";
 import validateForm from "../util/validateForm";
 import axios from "axios";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useRoute } from "@react-navigation/native";
+import { Button, Text } from "react-native-paper";
 
 const ReportForm = ({ navigation }: any) => {
-	const route = useRoute();
 	const [photo, setPhoto] = useState("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
@@ -21,20 +21,16 @@ const ReportForm = ({ navigation }: any) => {
 		undefined | { lat: number; lng: number }
 	>(undefined);
 	({ lat: null, lng: null });
-	console.log(route);
 
-	const submitHandler = async (event: any) => {
-		event.preventDefault();
+	const clearInputs = () => {
+		setPhoto("");
+		setTitle("");
+		setDescription("");
+		setSeverity("");
+		setLocation(undefined);
+	};
 
-		console.log(
-			validateForm({
-				image: photo,
-				title,
-				severity,
-				location,
-			})
-		);
-
+	const submitHandler = async () => {
 		// if (
 		// 	!validateForm({
 		// 		image: photo,
@@ -46,25 +42,54 @@ const ReportForm = ({ navigation }: any) => {
 		// 	return;
 		// }
 
-		const response = await axios.get("https://swapi.dev/api/people/1");
+		const response = await axios
+			.post("http://localhost:3000/api/v1/reports", {
+				image: photo,
+				title,
+				description,
+				severity,
+				location,
+			})
+			.catch((err) => console.log(err));
 
-		// const response = await axios
-		// 	.post("https://auth-60f9c-default-rtdb.firebaseio.com/", {
-		// 		image: photo,
-		// 		title,
-		// 		description,
-		// 		severity,
-		// 		location,
-		// 	})
-		// 	.catch((err) => console.log(err));
-
-		console.log(response.data);
+		if (response?.status === 200 || response?.status === 201) {
+			// TODO: notify user
+			clearInputs();
+			if (navigation.canGoBack()) {
+				navigation.goBack();
+			}
+			return;
+		}
+		// TODO: notify user
 	};
+
+	useLayoutEffect(() => {
+		navigation.setOptions({
+			headerLeft: () => (
+				<Icons
+					name="close"
+					size={24}
+					onPress={() => {
+						navigation.goBack();
+					}}
+					style={styles.topButtonLeft}
+				/>
+			),
+			headerRight: () => (
+				<Button style={styles.topButtonRight} onPress={submitHandler}>
+					PUBLISH
+				</Button>
+			),
+			title: "New report",
+			tabBarStyle: {
+				display: "none",
+			},
+		});
+	}, [navigation]);
 
 	return (
 		<ScrollView style={styles.container}>
 			<SafeAreaView>
-				<Button title="xd" onPress={submitHandler} />
 				<ImagePicker onUpdate={setPhoto} value={photo} />
 				<TitleInput onUpdate={setTitle} value={title} />
 				<TextArea onUpdate={setDescription} value={description} />
@@ -80,5 +105,12 @@ export default ReportForm;
 const styles = StyleSheet.create({
 	container: {
 		paddingHorizontal: 13,
+	},
+	topButtonRight: {
+		color: "#6750a4",
+		marginRight: 12,
+	},
+	topButtonLeft: {
+		marginLeft: 12,
 	},
 });
