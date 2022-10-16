@@ -1,6 +1,6 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
-import { Idea } from "../../domain/Idea";
+import { Idea } from "../../types/Idea";
 import { IdeasList } from "./IdeasList";
 
 export const IdeasListScreen = (props: {
@@ -10,7 +10,7 @@ export const IdeasListScreen = (props: {
   const [ideas, setIdeas] = useState<Idea[]>([]);
 
   const handleNewIdeaPressed = () => {
-    navigation.push("NewIdea");
+    navigation.push("New Idea");
   };
 
   return (

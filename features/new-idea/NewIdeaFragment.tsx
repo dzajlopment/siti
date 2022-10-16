@@ -1,7 +1,7 @@
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useLayoutEffect } from "react";
 import { StyleSheet, View } from "react-native";
-import { MD3Colors, Text } from "react-native-paper";
+import { Button } from "react-native-paper";
 import { Input } from "../../components/Input";
 
 import JustificationIcon from "../../assets/icons/handshake_FILL0_wght400_GRAD0_opsz24.svg";
@@ -16,11 +16,7 @@ export const NewIdeaFragment = (props: {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <Text style={style.action} onPress={() => {}}>
-          Press meh
-        </Text>
-      ),
+      headerRight: () => <Button onPress={() => {}}>PUBLISH</Button>,
     });
   }, []);
 
@@ -45,9 +41,6 @@ export const NewIdeaFragment = (props: {
 };
 
 const style = StyleSheet.create({
-  action: {
-    color: MD3Colors.primary40,
-  },
   container: {
     padding: 16,
   },

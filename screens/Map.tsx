@@ -1,8 +1,7 @@
-import { Alert, StyleSheet } from "react-native";
-import { useLayoutEffect, useCallback } from "react";
-import MapView, { MapEvent, Marker } from "react-native-maps";
-import { useState } from "react";
 import Icons from "@expo/vector-icons/Ionicons";
+import { useCallback, useLayoutEffect, useState } from "react";
+import { Alert, StyleSheet } from "react-native";
+import MapView, { MapEvent, Marker } from "react-native-maps";
 
 const Map = ({ navigation }: { navigation: any }) => {
 	const [selectedLocation, setSelectedLocation] = useState<
@@ -30,7 +29,7 @@ const Map = ({ navigation }: { navigation: any }) => {
 			return;
 		}
 
-		navigation.navigate("Add Report", {
+		navigation.navigate("New Report", {
 			pickedLat: selectedLocation.lat,
 			pickedLng: selectedLocation.lng,
 		});

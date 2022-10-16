@@ -1,11 +1,9 @@
-import {
-	launchCameraAsync,
-	useCameraPermissions,
-	PermissionStatus,
-} from "expo-image-picker";
-import { View, Alert, Image, StyleSheet } from "react-native";
-import { Button, Text } from "react-native-paper";
 import Icons from "@expo/vector-icons/MaterialCommunityIcons";
+import {
+	launchCameraAsync, PermissionStatus, useCameraPermissions
+} from "expo-image-picker";
+import { Alert, Image, StyleSheet, View } from "react-native";
+import { Button } from "react-native-paper";
 
 const ImagePicker = ({ onUpdate, value }: any) => {
 	const [cameraPermissionInformation, requestPermission] =
