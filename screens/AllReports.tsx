@@ -1,4 +1,4 @@
-import { ReportList } from "../features/reports/ReportList";
+import { ReportList } from "../components/AllReports/ReportList";
 
 const AllReports = () => {
 	return <ReportList />;
