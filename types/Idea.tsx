@@ -15,6 +15,6 @@ export enum IdeaStatus {
 }
 
 export interface Location {
-  lat: string;
-  lng: string;
+  lat: number;
+  lng: number;
 }
