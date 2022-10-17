@@ -7,6 +7,7 @@ export interface Idea {
   location: string | Location;
   cost: number;
   status?: IdeaStatus;
+  voting: IdeaVoting;
 }
 
 export enum IdeaStatus {
@@ -17,4 +18,9 @@ export enum IdeaStatus {
 export interface Location {
   lat: number;
   lng: number;
+}
+
+export interface IdeaVoting {
+  liked: boolean;
+  score: number;
 }
