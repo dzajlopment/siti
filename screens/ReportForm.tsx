@@ -43,6 +43,23 @@ const ReportForm = ({ navigation }: any) => {
 			setIsVisible(true);
 			return;
 		}
+		// console.log(
+		// 	validateForm({
+		// 		image: photo,
+		// 		title,
+		// 		severity,
+		// 		location,
+		// 	})
+		// );
+
+		console.log(
+			`\nPhoto -> ${photo}\nTitle -> ${title}\nSeverity -> ${severity}\nDescription -> ${description}\nLocation -> ${location?.lat} ;  ${location?.lng}`
+		);
+
+		return;
+		console.log("XD");
+
+		console.log(BACKEND_URL);
 
 		const response = await axios
 			.post(`${BACKEND_URL}/api/v1/reports`, {
@@ -50,9 +67,11 @@ const ReportForm = ({ navigation }: any) => {
 				title,
 				description,
 				severity,
-				location,
+				lat: location!.lat,
+				lng: location!.lng,
 			})
 			.catch((err) => console.log(err));
+
 		if (response?.status === 200 || response?.status === 201) {
 			setAlertText("Report sent successfully.");
 			setIsVisible(true);

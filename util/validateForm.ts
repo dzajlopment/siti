@@ -1,3 +1,7 @@
+const isEmpty = (string: string | undefined): boolean => {
+	return string ? string.trim().length === 0 : false;
+};
+
 export default ({
 	image,
 	location,
@@ -10,10 +14,10 @@ export default ({
 	title?: string;
 }) => {
 	return (
-		image?.length !== 0 &&
-		severity?.length !== 0 &&
-		title?.length !== 0 &&
-		location?.lat !== null &&
-		location?.lng !== null
+		!isEmpty(image) &&
+		!isEmpty(severity) &&
+		!isEmpty(title) &&
+		!isEmpty(location?.lng.toString()) &&
+		!isEmpty(location?.lat.toString())
 	);
 };
