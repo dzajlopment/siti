@@ -9,48 +9,48 @@ import Map from "../screens/Map";
 import ReportForm from "../screens/ReportForm";
 
 const Navigation = () => {
-  const Stack = createNativeStackNavigator();
-  const BottomTab = createBottomTabNavigator();
+	const Stack = createNativeStackNavigator();
+	const BottomTab = createBottomTabNavigator();
 
-  function Home() {
-    return (
-      <BottomTab.Navigator>
-        <BottomTab.Screen
-          options={{
-            tabBarIcon({ color, size }) {
-              return <Icons name="list-outline" color={color} size={size} />;
-            },
-          }}
-          name="Reports"
-          component={AllReports}
-        />
-        <BottomTab.Screen
-          options={{
-            tabBarIcon({ color, size }) {
-              return <Icons name="bulb" color={color} size={size} />;
-            },
-          }}
-          name="Ideas"
-          component={IdeasListScreen}
-        />
-      </BottomTab.Navigator>
-    );
-  }
+	function Home() {
+		return (
+			<BottomTab.Navigator>
+				<BottomTab.Screen
+					options={{
+						tabBarIcon({ color, size }) {
+							return <Icons name="list-outline" color={color} size={size} />;
+						},
+					}}
+					name="Reports"
+					component={AllReports}
+				/>
+				<BottomTab.Screen
+					options={{
+						tabBarIcon({ color, size }) {
+							return <Icons name="bulb" color={color} size={size} />;
+						},
+					}}
+					name="Ideas"
+					component={IdeasListScreen}
+				/>
+			</BottomTab.Navigator>
+		);
+	}
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen name="Map" component={Map} />
-        <Stack.Screen name="New Report" component={ReportForm} />
-        <Stack.Screen name="New Idea" component={NewIdeaFragment} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+	return (
+		<NavigationContainer>
+			<Stack.Navigator initialRouteName="Home">
+				<Stack.Screen
+					name="Home"
+					component={Home}
+					options={{ headerShown: false }}
+				/>
+				<Stack.Screen name="Map" component={Map} />
+				<Stack.Screen name="New Report" component={ReportForm} />
+				<Stack.Screen name="New Idea" component={NewIdeaFragment} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 };
 
 export default Navigation;

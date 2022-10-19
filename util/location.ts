@@ -1,4 +1,4 @@
-const GOOGLE_API_KEY = "";
+import { GOOGLE_API_KEY } from "@env";
 
 export const getMapPreview = (lat: number, lng: number) => {
 	const imagePreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lng}&zoom=13&size=400x200&maptype=roadmap
