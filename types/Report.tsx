@@ -1,6 +1,7 @@
 export interface Report {
-  readonly id: String;
-  title: String;
-  description?: String;
-  created: Date;
+	readonly _id: String;
+	title: String;
+	description?: String;
+	date: string;
+	__v: Number;
 }

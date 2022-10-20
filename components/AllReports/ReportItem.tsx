@@ -6,13 +6,20 @@ export const ReportItem = (props: { report: Report; onSelect: () => void }) => {
 	const { report, onSelect } = props;
 
 	const description = report.description ?? "No description";
-	const timestamp = report.created.toDateString();
+	const timestamp = new Date(report.date).toDateString();
 
 	return (
 		<List.Item
 			title={report.title}
 			style={style.item}
-			left={() => <Image style={style.image} source={{}} />}
+			left={() => (
+				<Image
+					style={style.image}
+					source={{
+						uri: "https://media.discordapp.net/attachments/657658801863917568/1032028119504269352/unknown.png?width=705&height=439",
+					}}
+				/>
+			)}
 			description={description}
 			descriptionNumberOfLines={1}
 			right={() => <Text style={style.timestamp}>{timestamp}</Text>}
