@@ -16,7 +16,9 @@ export const ReportItem = (props: { report: Report; onSelect: () => void }) => {
 				<Image
 					style={style.image}
 					source={{
-						uri: "https://media.discordapp.net/attachments/657658801863917568/1032028119504269352/unknown.png?width=705&height=439",
+						uri:
+							report.image ||
+							"https://media.discordapp.net/attachments/657658801863917568/1032028119504269352/unknown.png?width=705&height=439",
 					}}
 				/>
 			)}

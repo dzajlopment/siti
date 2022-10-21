@@ -3,5 +3,6 @@ export interface Report {
 	title: String;
 	description?: String;
 	date: string;
+	image: string;
 	__v: Number;
 }
