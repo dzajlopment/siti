@@ -1,6 +1,8 @@
 import Icons from "@expo/vector-icons/MaterialCommunityIcons";
 import {
-	launchCameraAsync, PermissionStatus, useCameraPermissions
+	launchCameraAsync,
+	PermissionStatus,
+	useCameraPermissions,
 } from "expo-image-picker";
 import { Alert, Image, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
@@ -35,7 +37,7 @@ const ImagePicker = ({ onUpdate, value }: any) => {
 		}
 
 		const image = await launchCameraAsync({
-			quality: 0.5,
+			quality: 0.7,
 		});
 		onUpdate((image as any).uri);
 	};

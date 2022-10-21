@@ -43,16 +43,28 @@ const ReportForm = ({ navigation }: any) => {
 			setIsVisible(true);
 			return;
 		}
-		const response = await axios
-			.post(`${BACKEND_URL}/api/v1/reports`, {
-				image: photo,
-				title,
-				description,
-				severity,
-				lat: location!.lat,
-				lng: location!.lng,
-			})
-			.catch((err) => console.log(err));
+
+		const formData = new FormData() as any;
+		formData.append("image", {
+			uri: photo,
+			type: "image/jpeg",
+			name: `${photo}`,
+		});
+		formData.append("title", title);
+		formData.append("description", description);
+		formData.append("severity", severity);
+		formData.append("lat", location!.lat);
+		formData.append("lng", location!.lng);
+		console.log(formData);
+
+		const response = await fetch(`${BACKEND_URL}/api/v1/reports`, {
+			method: "POST",
+			body: formData,
+			headers: {
+				Accept: "application/json",
+				"Content-Type": "multipart/form-data",
+			},
+		});
 
 		if (response?.status === 200 || response?.status === 201) {
 			setAlertText("Report sent successfully.");
