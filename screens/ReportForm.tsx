@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Button, Snackbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -43,24 +43,6 @@ const ReportForm = ({ navigation }: any) => {
 			setIsVisible(true);
 			return;
 		}
-		// console.log(
-		// 	validateForm({
-		// 		image: photo,
-		// 		title,
-		// 		severity,
-		// 		location,
-		// 	})
-		// );
-
-		console.log(
-			`\nPhoto -> ${photo}\nTitle -> ${title}\nSeverity -> ${severity}\nDescription -> ${description}\nLocation -> ${location?.lat} ;  ${location?.lng}`
-		);
-
-		return;
-		console.log("XD");
-
-		console.log(BACKEND_URL);
-
 		const response = await axios
 			.post(`${BACKEND_URL}/api/v1/reports`, {
 				image: photo,
@@ -89,7 +71,7 @@ const ReportForm = ({ navigation }: any) => {
 		navigation.setOptions({
 			headerRight: () => <Button onPress={submitHandler}>PUBLISH</Button>,
 		});
-	}, [navigation]);
+	}, [navigation, photo, title, description, severity, location]);
 
 	return (
 		<ScrollView style={styles.container}>

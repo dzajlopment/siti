@@ -12,9 +12,12 @@ export const ReportList = () => {
 	const navigation = useNavigation();
 
 	useEffect(() => {
-		axios.get(`${BACKEND_URL}/api/v1/reports`).then((data) => {
-			setReports(data.data.data.data);
-		});
+		axios
+			.get(`${BACKEND_URL}/api/v1/reports`)
+			.then((data) => {
+				setReports(data.data.data);
+			})
+			.catch((err) => console.log(err));
 	}, []);
 
 	const renderListHeader = (): ReactElement => (
