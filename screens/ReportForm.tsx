@@ -55,7 +55,6 @@ const ReportForm = ({ navigation }: any) => {
 		formData.append("severity", severity);
 		formData.append("lat", location!.lat);
 		formData.append("lng", location!.lng);
-		console.log(formData);
 
 		const response = await fetch(`${BACKEND_URL}/api/v1/reports`, {
 			method: "POST",
