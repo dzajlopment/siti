@@ -32,7 +32,9 @@ const Map = ({ navigation }: { navigation: NativeStackNavigationProp<{ [key: str
 			return;
 		}
 
-		navigation.navigate("New Report", selectedLocation)
+		const navigationStack = navigation.getState().routes
+		const parentRouteName = navigationStack[navigationStack.length - 2]?.name ?? "Home"
+		navigation.navigate(parentRouteName, selectedLocation)
 	}, [navigation, selectedLocation]);
 
 	useLayoutEffect(() => {
