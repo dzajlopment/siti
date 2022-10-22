@@ -49,7 +49,7 @@ const Navigation = () => {
 				<Stack.Screen name="Map" component={Map} />
 				<Stack.Screen name="New Report" component={ReportForm} />
 				<Stack.Screen name="New Idea" component={NewIdeaFragment} />
-				<Stack.Screen name="ReportDetails" component={ReportDetails} />
+				<Stack.Screen name="Report details" component={ReportDetails} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

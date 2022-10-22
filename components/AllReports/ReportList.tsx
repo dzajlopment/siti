@@ -39,7 +39,7 @@ export const ReportList = () => {
 					report={report.item}
 					onSelect={() => {
 						navigation.navigate(
-							"ReportDetails" as never,
+							"Report details" as never,
 							{
 								id: report.item._id,
 								date: report.item.date,
