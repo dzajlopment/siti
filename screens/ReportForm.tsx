@@ -1,5 +1,5 @@
-import axios from "axios";
-import { useCallback, useLayoutEffect, useState } from "react";
+import { BACKEND_URL } from "@env";
+import { useLayoutEffect, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Button, Snackbar } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -8,17 +8,15 @@ import LocationPicker from "../components/ReportsForm/LocationPicker";
 import SeverityInput from "../components/ReportsForm/SeverityInput";
 import TextArea from "../components/ReportsForm/TextArea";
 import TitleInput from "../components/ReportsForm/TitleInput";
+import { Location } from "../types/Idea";
 import validateForm from "../util/validateForm";
-import { BACKEND_URL } from "@env";
+
 const ReportForm = ({ navigation }: any) => {
 	const [photo, setPhoto] = useState("");
 	const [title, setTitle] = useState("");
 	const [description, setDescription] = useState("");
 	const [severity, setSeverity] = useState("");
-	const [location, setLocation] = useState<
-		undefined | { lat: number; lng: number }
-	>(undefined);
-	({ lat: null, lng: null });
+	const [location, setLocation] = useState<undefined | Location>(undefined);
 	const [isVisible, setIsVisible] = useState(false);
 	const [alertText, setAlertText] = useState("");
 

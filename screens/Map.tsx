@@ -1,11 +1,14 @@
 import Icons from "@expo/vector-icons/Ionicons";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { Alert, StyleSheet } from "react-native";
 import MapView, { MapEvent, Marker } from "react-native-maps";
+import { Location } from "../types/Idea";
 
-const Map = ({ navigation }: { navigation: any }) => {
+const Map = ({ navigation }: { navigation: NativeStackNavigationProp<{ [key: string]: Location }> }) => {
+
 	const [selectedLocation, setSelectedLocation] = useState<
-		undefined | { lat: number; lng: number }
+		undefined | Location
 	>();
 
 	const region = {
@@ -29,10 +32,7 @@ const Map = ({ navigation }: { navigation: any }) => {
 			return;
 		}
 
-		navigation.navigate("New Report", {
-			pickedLat: selectedLocation.lat,
-			pickedLng: selectedLocation.lng,
-		});
+		navigation.navigate("New Report", selectedLocation)
 	}, [navigation, selectedLocation]);
 
 	useLayoutEffect(() => {
