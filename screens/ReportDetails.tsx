@@ -15,7 +15,7 @@ const ReportDetails = ({ route }: any) => {
 	const capitalizedSeverity = severity[0].toUpperCase() + severity.slice(1);
 
 	return (
-		<View style={styles.container}>
+		<ScrollView style={styles.container}>
 			<View style={styles.imageContainer}>
 				<Image style={styles.image} source={{ uri: image }} />
 			</View>
@@ -44,7 +44,7 @@ const ReportDetails = ({ route }: any) => {
 					}}
 				/>
 			</View>
-		</View>
+		</ScrollView>
 	);
 };
 
