@@ -1,4 +1,8 @@
-import { useNavigation } from "@react-navigation/native";
+import {
+	useIsFocused,
+	useNavigation,
+	useRoute,
+} from "@react-navigation/native";
 import axios from "axios";
 import { ReactElement, useEffect, useState } from "react";
 import { FlatList, ListRenderItemInfo, StyleSheet, View } from "react-native";
@@ -11,14 +15,22 @@ export const ReportList = () => {
 	const [reports, setReports] = useState<Report[]>([]);
 	const navigation = useNavigation();
 
-	useEffect(() => {
+	const updateData = () => {
 		axios
 			.get(`${BACKEND_URL}/api/v1/reports`)
 			.then((data) => {
-				setReports(data.data.data);
+				setReports(data.data.data.reverse());
 			})
 			.catch((err) => console.log(err));
-	}, []);
+	};
+
+	const isFocused = useIsFocused();
+
+	useEffect(() => {
+		if (isFocused) {
+			updateData();
+		}
+	}, [isFocused]);
 
 	const renderListHeader = (): ReactElement => (
 		<Button

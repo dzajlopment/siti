@@ -69,6 +69,7 @@ const ReportForm = ({ navigation }: any) => {
 			setAlertText("Report sent successfully.");
 			setIsVisible(true);
 			clearInputs();
+
 			if (navigation.canGoBack()) {
 				navigation.goBack();
 			}
