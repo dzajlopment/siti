@@ -4,7 +4,7 @@ export interface Idea {
   description: string;
   justification: string;
   created: Date;
-  location: string | Location;
+  location: Location;
   cost?: number;
   status?: IdeaStatus;
   voting: IdeaVoting;
