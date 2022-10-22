@@ -5,14 +5,16 @@ export interface Idea {
   justification: string;
   created: Date;
   location: string | Location;
-  cost: number;
+  cost?: number;
   status?: IdeaStatus;
   voting: IdeaVoting;
 }
 
+export type IdeaForm = Omit<Idea, "id" | "created" | "voting">;
+
 export enum IdeaStatus {
-  Approved,
-  Rejected,
+  Approved = "approved",
+  Rejected = "rejected",
 }
 
 export interface Location {
