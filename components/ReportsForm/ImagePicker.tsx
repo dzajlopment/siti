@@ -60,10 +60,8 @@ const ImagePicker = ({ onUpdate, value }: any) => {
 		if (!hasPermission) {
 			return;
 		}
-
 		const image = await launchImageLibraryAsync({
 			mediaTypes: MediaTypeOptions.Images,
-			allowsEditing: true,
 			quality: 0.7,
 		});
 
