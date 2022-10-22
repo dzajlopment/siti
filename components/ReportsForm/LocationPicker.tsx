@@ -1,15 +1,18 @@
 import Icons from "@expo/vector-icons/Ionicons";
 import Icon from "@expo/vector-icons/MaterialIcons";
 import { RouteProp, useIsFocused, useNavigation, useRoute } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { getCurrentPositionAsync, PermissionStatus, useForegroundPermissions } from "expo-location";
 import { useEffect } from "react";
 import { Alert, Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Location } from "../../types/Idea";
 import { getMapPreview } from "../../util/location";
 
-const LocationPicker = ({ onUpdate, value }: any) => {
+const LocationPicker = ({ onUpdate, value }: { onUpdate: (location: Location) => void, value: Location | undefined }) => {
+
 	const isFocused = useIsFocused();
 
-	const navigation = useNavigation();
+	const navigation = useNavigation<NativeStackNavigationProp<{ "Map": Location | undefined }>>();
 	const route = useRoute<RouteProp<{ location: Location }>>();
 
 	const [locationPermissionInformation, requestPermission] =
@@ -53,7 +56,7 @@ const LocationPicker = ({ onUpdate, value }: any) => {
 	};
 
 	const pickOnMapHandler = () => {
-		(navigation as any).push("Map");
+		navigation.push("Map", value);
 	};
 
 	let locationPreview = null;

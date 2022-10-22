@@ -1,4 +1,5 @@
 import Icons from "@expo/vector-icons/Ionicons";
+import { RouteProp, useRoute } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { Alert, StyleSheet } from "react-native";
@@ -7,9 +8,11 @@ import { Location } from "../types/Idea";
 
 const Map = ({ navigation }: { navigation: NativeStackNavigationProp<{ [key: string]: Location }> }) => {
 
+	const route = useRoute<RouteProp<{ location: Location | undefined }>>();
+
 	const [selectedLocation, setSelectedLocation] = useState<
 		undefined | Location
-	>();
+	>(route.params);
 
 	const region = {
 		latitude: 37.78,
