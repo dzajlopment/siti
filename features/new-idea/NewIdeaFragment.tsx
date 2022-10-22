@@ -26,11 +26,11 @@ export const NewIdeaFragment = (props: {
   const [error, setError] = useState<Error | null>(null);
   const [snackbarVisible, setSnackbarVisible] = useState<boolean>(false);
 
-  const submitHandler = () => {
-    if(!location) {
+  const submitHandler = async () => {
+    if (!location) {
       setError(new Error("Pick a location"));
       setSnackbarVisible(true);
-      return
+      return;
     }
 
     const newIdeaFormData: IdeaForm = {
@@ -51,20 +51,27 @@ export const NewIdeaFragment = (props: {
     setError(null);
     setSnackbarVisible(false);
 
-    fetch(`${BACKEND_URL}/api/v1/ideas`, {
+    const response = await fetch(`${BACKEND_URL}/api/v1/ideas`, {
       method: "POST",
       body: JSON.stringify(newIdeaFormData),
       headers: {
         "Content-Type": "application/json",
       },
-    }).catch(() => console.error("failed"));
+    })
+
+    if (response.status === 201) {
+      navigation.goBack();
+    }
+
+    setError(new Error(`Couldn't send report. Try again later`));
+    setSnackbarVisible(true);
   };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => <Button onPress={submitHandler}>PUBLISH</Button>,
     });
-  }, [subject, description, justification, price]);
+  }, [subject, description, justification, price, location]);
 
   return (
     <>
