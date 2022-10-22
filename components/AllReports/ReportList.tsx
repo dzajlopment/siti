@@ -35,7 +35,26 @@ export const ReportList = () => {
 
 		return (
 			<>
-				<ReportItem report={report.item} onSelect={() => {}} />
+				<ReportItem
+					report={report.item}
+					onSelect={() => {
+						navigation.navigate(
+							"ReportDetails" as never,
+							{
+								id: report.item._id,
+								date: report.item.date,
+								description: report.item.description,
+								image: report.item.image,
+								title: report.item.title,
+								severity: report.item.severity,
+								location: {
+									lat: report.item.lat,
+									lng: report.item.lng,
+								},
+							} as never
+						);
+					}}
+				/>
 				{showDivider && <View style={styles.divider} />}
 			</>
 		);

@@ -4,5 +4,8 @@ export interface Report {
 	description?: String;
 	date: string;
 	image: string;
+	severity: string;
+	lat: number;
+	lng: number;
 	__v: Number;
 }

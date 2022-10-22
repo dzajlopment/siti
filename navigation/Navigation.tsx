@@ -6,7 +6,7 @@ import { IdeasListScreen } from "../features/ideas-list/IdeasListScreen";
 import { NewIdeaFragment } from "../features/new-idea/NewIdeaFragment";
 import AllReports from "../screens/AllReports";
 import Map from "../screens/Map";
-import Report from "../screens/Report";
+import ReportDetails from "../screens/ReportDetails";
 import ReportForm from "../screens/ReportForm";
 
 const Navigation = () => {
@@ -49,7 +49,7 @@ const Navigation = () => {
 				<Stack.Screen name="Map" component={Map} />
 				<Stack.Screen name="New Report" component={ReportForm} />
 				<Stack.Screen name="New Idea" component={NewIdeaFragment} />
-				<Stack.Screen name="Report" component={Report} />
+				<Stack.Screen name="ReportDetails" component={ReportDetails} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);
