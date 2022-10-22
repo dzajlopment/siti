@@ -1,14 +1,15 @@
 import { BACKEND_URL } from "@env";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useLayoutEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
 import JustificationIcon from "../../assets/icons/handshake_FILL0_wght400_GRAD0_opsz24.svg";
 import LightbulbIcon from "../../assets/icons/lightbulb_FILL0_wght400_GRAD0_opsz24.svg";
 import PriceIcon from "../../assets/icons/sell_FILL0_wght400_GRAD0_opsz24.svg";
 import DescriptionIcon from "../../assets/icons/subject_FILL0_wght400_GRAD0_opsz24.svg";
 import { Input } from "../../components/Input";
-import { IdeaForm } from "../../types/Idea";
+import LocationPicker from "../../components/ReportsForm/LocationPicker";
+import { IdeaForm, Location } from "../../types/Idea";
 
 export const NewIdeaFragment = (props: {
   navigation: NativeStackNavigationProp<any>;
@@ -19,28 +20,24 @@ export const NewIdeaFragment = (props: {
   const [description, setDescription] = useState("");
   const [justification, setJustification] = useState("");
   const [price, setPrice] = useState("");
+  const [location, setLocation] = useState<Location>({ lat: 0, lng: 0 });
 
   const submitHandler = () => {
-    const body: IdeaForm = {
+    const newIdeaFormData: IdeaForm = {
       title: subject,
       description,
       justification,
       cost: parseInt(price),
-      location: {
-        lat: 0,
-        lng: 0,
-      },
+      location,
     };
 
     fetch(`${BACKEND_URL}/api/v1/ideas`, {
       method: "POST",
-      body: JSON.stringify(body),
+      body: JSON.stringify(newIdeaFormData),
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then(() => console.log("done"))
-      .catch(() => console.error("failed"));
+    }).catch(() => console.error("failed"));
   };
 
   useLayoutEffect(() => {
@@ -50,7 +47,7 @@ export const NewIdeaFragment = (props: {
   }, [subject, description, justification, price]);
 
   return (
-    <View style={style.container}>
+    <ScrollView style={style.container}>
       <Input
         icon={LightbulbIcon}
         label="Subject"
@@ -65,7 +62,6 @@ export const NewIdeaFragment = (props: {
         value={description}
         onChangeText={(description) => setDescription(description)}
       />
-
       <Input
         icon={JustificationIcon}
         label="Justification"
@@ -81,7 +77,8 @@ export const NewIdeaFragment = (props: {
         value={price}
         onChangeText={(price) => setPrice(price)}
       />
-    </View>
+      <LocationPicker onUpdate={setLocation} value={location} />
+    </ScrollView>
   );
 };
 
