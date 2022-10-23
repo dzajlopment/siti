@@ -10,7 +10,7 @@ import DescriptionIcon from "../../assets/icons/subject_FILL0_wght400_GRAD0_opsz
 import VerifiedIcon from "../../assets/icons/verified_FILL0_wght400_GRAD0_opsz24.svg";
 import { Field } from "../../components/Field";
 import { TextField } from "../../components/TextField";
-import { Idea } from "../../types/Idea";
+import { Idea, IdeaStatus } from "../../types/Idea";
 import { getMapPreview } from "../../util/location";
 import { Voting } from "../voting/Voting";
 
@@ -22,14 +22,20 @@ export const IdeaDetails = () => {
     idea;
   const [liked, setLiked] = useState(idea.voting.liked);
 
+  // For some reason, backend type for Idea stores an object instead of a plain string
+  let ideaStatus = status;
+  if (typeof status === "object") {
+    type BackendIdeaStatus = { approved: boolean; rejected: boolean };
+    ideaStatus = (status as BackendIdeaStatus).approved
+      ? IdeaStatus.Approved
+      : IdeaStatus.Rejected;
+  }
+
   return (
     <ScrollView style={style.container}>
       <Voting score={32} liked={liked} onVoteChange={setLiked} horizontal />
       <TextField icon={TimeIcon} value={new Date(created).toLocaleString()} />
-      <TextField
-        icon={VerifiedIcon}
-        value={idea.status?.toUpperCase() ?? "Not yet verified"}
-      />
+      <TextField icon={VerifiedIcon} value={ideaStatus ?? "Not yet verified"} />
       <TextField icon={LightbulbIcon} value={title} />
       <TextField icon={DescriptionIcon} value={description} />
       <TextField icon={JustificationIcon} value={justification} />

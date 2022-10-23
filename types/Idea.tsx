@@ -13,8 +13,8 @@ export interface Idea {
 export type IdeaForm = Omit<Idea, "_id" | "created" | "voting">;
 
 export enum IdeaStatus {
-  Approved = "approved",
-  Rejected = "rejected",
+  Approved = "Approved",
+  Rejected = "Rejected",
 }
 
 export interface Location {
