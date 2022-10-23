@@ -3,7 +3,7 @@ export interface Idea {
   title: string;
   description: string;
   justification: string;
-  created: Date;
+  created: string;
   location: Location;
   cost?: number;
   status?: IdeaStatus;

@@ -8,7 +8,10 @@ import { Idea, IdeaStatus, IdeaVoting } from "../../types/Idea";
 import { IdeasList } from "./IdeasList";
 
 export const IdeasListScreen = (props: {
-  navigation: NativeStackNavigationProp<any>;
+  navigation: NativeStackNavigationProp<{
+    "New Idea": undefined;
+    "Idea Details": Idea;
+  }>;
 }) => {
   const navigation = props.navigation;
   const [allIdeas, setAllIdeas] = useState<Idea[]>([]);
@@ -44,8 +47,11 @@ export const IdeasListScreen = (props: {
       .sort((a: Idea, b: Idea) => b.voting.score - a.voting.score);
   }, [allIdeas]);
 
-  const handleNewIdeaPressed = () => {
-    navigation.push("New Idea");
+  const handleIdeaPressed = (id: string) => {
+    const idea = allIdeas.find((idea) => idea._id === id);
+    if (idea) {
+      navigation.push("Idea Details", idea);
+    }
   };
 
   const handleVoteChanged = (id: string, liked: boolean) => {
@@ -57,11 +63,15 @@ export const IdeasListScreen = (props: {
     setAllIdeas(updatedIdeas);
   };
 
+  const handleNewIdeaPressed = () => {
+    navigation.push("New Idea");
+  };
+
   return (
     <>
       <IdeasList
         ideas={ideasToDisplay}
-        onIdeaPress={() => {}}
+        onIdeaPress={handleIdeaPressed}
         onVoteChange={handleVoteChanged}
         onNewIdeaPress={handleNewIdeaPressed}
       />

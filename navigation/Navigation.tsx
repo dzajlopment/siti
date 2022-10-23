@@ -2,6 +2,7 @@ import Icons from "@expo/vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { IdeaDetails } from "../features/idea-details/IdeaDetails";
 import { IdeasListScreen } from "../features/ideas-list/IdeasListScreen";
 import { NewIdeaFragment } from "../features/new-idea/NewIdeaFragment";
 import AllReports from "../screens/AllReports";
@@ -48,8 +49,9 @@ const Navigation = () => {
 				/>
 				<Stack.Screen name="Map" component={Map} />
 				<Stack.Screen name="New Report" component={ReportForm} />
-				<Stack.Screen name="New Idea" component={NewIdeaFragment} />
 				<Stack.Screen name="Report details" component={ReportDetails} />
+				<Stack.Screen name="New Idea" component={NewIdeaFragment} />
+				<Stack.Screen name="Idea Details" component={IdeaDetails} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

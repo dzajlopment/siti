@@ -21,6 +21,7 @@ const style = StyleSheet.create({
     textAlignVertical: "center",
     fontSize: 16,
     paddingTop: 19,
+    paddingBottom: 19,
     flex: 1,
   },
 });
