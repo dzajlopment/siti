@@ -4,15 +4,17 @@ export interface Idea {
   description: string;
   justification: string;
   created: Date;
-  location: string | Location;
-  cost: number;
+  location: Location;
+  cost?: number;
   status?: IdeaStatus;
   voting: IdeaVoting;
 }
 
+export type IdeaForm = Omit<Idea, "id" | "created" | "voting">;
+
 export enum IdeaStatus {
-  Approved,
-  Rejected,
+  Approved = "approved",
+  Rejected = "rejected",
 }
 
 export interface Location {

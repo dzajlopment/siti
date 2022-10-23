@@ -1,12 +1,18 @@
 import Icons from "@expo/vector-icons/Ionicons";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useCallback, useLayoutEffect, useState } from "react";
 import { Alert, StyleSheet } from "react-native";
 import MapView, { MapEvent, Marker } from "react-native-maps";
+import { Location } from "../types/Idea";
 
-const Map = ({ navigation }: { navigation: any }) => {
+const Map = ({ navigation }: { navigation: NativeStackNavigationProp<{ [key: string]: Location }> }) => {
+
+	const route = useRoute<RouteProp<{ location: Location | undefined }>>();
+
 	const [selectedLocation, setSelectedLocation] = useState<
-		undefined | { lat: number; lng: number }
-	>();
+		undefined | Location
+	>(route.params);
 
 	const region = {
 		latitude: 37.78,
@@ -29,10 +35,9 @@ const Map = ({ navigation }: { navigation: any }) => {
 			return;
 		}
 
-		navigation.navigate("New Report", {
-			pickedLat: selectedLocation.lat,
-			pickedLng: selectedLocation.lng,
-		});
+		const navigationStack = navigation.getState().routes
+		const parentRouteName = navigationStack[navigationStack.length - 2]?.name ?? "Home"
+		navigation.navigate(parentRouteName, selectedLocation)
 	}, [navigation, selectedLocation]);
 
 	useLayoutEffect(() => {
