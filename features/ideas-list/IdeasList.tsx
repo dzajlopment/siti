@@ -31,10 +31,10 @@ export const IdeasList = (props: IdeasListProps) => {
       ListHeaderComponentStyle={{ marginBottom: 12 }}
       renderItem={({ item }) => (
         <IdeaListItem
-          key={item.id}
+          key={item._id}
           idea={item}
-          onPress={() => onIdeaPress(item.id)}
-          onVoteChange={(liked) => onVoteChange(item.id, liked)}
+          onPress={() => onIdeaPress(item._id)}
+          onVoteChange={(liked) => onVoteChange(item._id, liked)}
         />
       )}
     />

@@ -1,5 +1,5 @@
 export interface Idea {
-  readonly id: string;
+  readonly _id: string;
   title: string;
   description: string;
   justification: string;
@@ -10,7 +10,7 @@ export interface Idea {
   voting: IdeaVoting;
 }
 
-export type IdeaForm = Omit<Idea, "id" | "created" | "voting">;
+export type IdeaForm = Omit<Idea, "_id" | "created" | "voting">;
 
 export enum IdeaStatus {
   Approved = "approved",

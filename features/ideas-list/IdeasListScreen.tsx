@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { Snackbar } from "react-native-paper";
-import { Idea, IdeaStatus } from "../../types/Idea";
+import { Idea, IdeaStatus, IdeaVoting } from "../../types/Idea";
 import { IdeasList } from "./IdeasList";
 
 export const IdeasListScreen = (props: {
@@ -14,10 +14,6 @@ export const IdeasListScreen = (props: {
   const [allIdeas, setAllIdeas] = useState<Idea[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [snackbarVisible, setSnackbarVisible] = useState<boolean>(false);
-
-  const handleNewIdeaPressed = () => {
-    navigation.push("New Idea");
-  };
 
   const fetchIdeas = () => {
     axios
@@ -48,12 +44,25 @@ export const IdeasListScreen = (props: {
       .sort((a: Idea, b: Idea) => b.voting.score - a.voting.score);
   }, [allIdeas]);
 
+  const handleNewIdeaPressed = () => {
+    navigation.push("New Idea");
+  };
+
+  const handleVoteChanged = (id: string, liked: boolean) => {
+    const updatedIdeas = allIdeas.map((idea) => {
+      if (idea._id !== id) return idea;
+      const voting: IdeaVoting = { ...idea.voting, liked };
+      return { ...idea, voting };
+    });
+    setAllIdeas(updatedIdeas);
+  };
+
   return (
     <>
       <IdeasList
         ideas={ideasToDisplay}
         onIdeaPress={() => {}}
-        onVoteChange={() => {}}
+        onVoteChange={handleVoteChanged}
         onNewIdeaPress={handleNewIdeaPressed}
       />
       <Snackbar
