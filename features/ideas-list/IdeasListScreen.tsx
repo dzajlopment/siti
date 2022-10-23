@@ -38,7 +38,7 @@ export const IdeasListScreen = (props: {
     if (isFocused) {
       fetchIdeas();
     }
-  }, []);
+  }, [isFocused]);
 
   const ideasToDisplay = useMemo(() => {
     // Remove rejected ideas and sort descending by score
