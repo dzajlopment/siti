@@ -1,10 +1,10 @@
 {
     "expo": {
-        "name": "siti",
+        "name": "Siti",
         "slug": "siti",
         "version": "1.0.0",
         "orientation": "portrait",
-        "icon": "./assets/logo.png",
+        "icon": "./assets/icon.png",
         "userInterfaceStyle": "light",
         "splash": {
             "image": "./assets/splash.png",
@@ -20,19 +20,16 @@
         },
         "android": {
             "adaptiveIcon": {
-                "foregroundImage": "./assets/logo.png",
-                "backgroundColor": "#ffffff"
+                "foregroundImage": "./assets/adaptive-icon.png",
+                "backgroundColor": "#FFFFFF"
             }
-        },
-        "web": {
-            "favicon": "./assets/logo.png"
         },
         "plugins": [
             [
                 "expo-image-picker",
                 {
                     "cameraPermission": "The app needs access to your camera in order to take photos.",
-                    "photosPermission": "The app accesses your photos to let you share them with your friends."
+                    "photosPermission": "The app accesses your photos to let you share them in reports."
                 }
             ]
         ]
