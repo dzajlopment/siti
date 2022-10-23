@@ -9,7 +9,7 @@ const TitleInput = ({ onUpdate, value }: any) => {
 				<Icons name="warning-outline" size={24} color="#201f23" />
 				<TextInput
 					style={styles.input}
-					label="What happened?"
+					label="What happened?*"
 					mode="outlined"
 					value={value}
 					onChangeText={(text) => {

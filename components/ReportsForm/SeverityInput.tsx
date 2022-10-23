@@ -32,7 +32,7 @@ const SeverityInput = ({ onUpdate, value }: any) => {
 			<View style={styles.dropDownContainer}>
 				<DropDown
 					dropDownStyle={styles.list}
-					label="Severity"
+					label="Severity*"
 					mode="outlined"
 					visible={isVisible}
 					showDropDown={() => setIsVisible(true)}
