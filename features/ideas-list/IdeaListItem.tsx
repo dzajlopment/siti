@@ -1,3 +1,4 @@
+import { StyleSheet, View } from "react-native";
 import { List } from "react-native-paper";
 import { Idea } from "../../types/Idea";
 import { Voting } from "../voting/Voting";
@@ -17,7 +18,9 @@ export const IdeaListItem = (props: IdeaListItemProps) => {
     <List.Item
       style={{ paddingLeft: 0 }}
       left={() => (
-        <Voting liked={liked} onVoteChange={onVoteChange} score={score} />
+        <View style={style.voting}>
+          <Voting liked={liked} onVoteChange={onVoteChange} score={score} />
+        </View>
       )}
       onPress={onPress}
       title={title}
@@ -26,3 +29,9 @@ export const IdeaListItem = (props: IdeaListItemProps) => {
     />
   );
 };
+
+const style = StyleSheet.create({
+  voting: {
+    margin: 4,
+  },
+});

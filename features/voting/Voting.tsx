@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { DefaultTheme, IconButton, Text, Theme } from "react-native-paper";
 import LikeIconOutlined from "../../assets/icons/thumb_up_FILL0_wght400_GRAD0_opsz24.svg";
 import LikeIconFilled from "../../assets/icons/thumb_up_FILL1_wght400_GRAD0_opsz24.svg";
@@ -8,6 +8,7 @@ export interface VotingProps {
   liked: boolean;
   onVoteChange: (liked: boolean) => void;
   theme?: Theme;
+  horizontal?: boolean;
 }
 
 export const Voting = ({ theme = DefaultTheme, ...props }: VotingProps) => {
@@ -17,13 +18,15 @@ export const Voting = ({ theme = DefaultTheme, ...props }: VotingProps) => {
   const tint = theme.colors[liked ? "primary" : "onSurface"];
   const backgroundColor = liked ? "#e7e0ec" : "#e6e6e6";
 
+  const localStyle = style(props.horizontal as boolean);
+
   const renderIcon = () => (
-    <>
-      <LikeIcon style={style.icon} fill={tint} />
-      <Text variant="bodyMedium" style={[style.score, { color: tint }]}>
+    <View style={localStyle.wrapper}>
+      <LikeIcon style={localStyle.icon} fill={tint} />
+      <Text variant="bodyMedium" style={[localStyle.score, { color: tint }]}>
         {score}
       </Text>
-    </>
+    </View>
   );
 
   return (
@@ -31,23 +34,35 @@ export const Voting = ({ theme = DefaultTheme, ...props }: VotingProps) => {
       mode="contained"
       containerColor={backgroundColor}
       onPress={() => onVoteChange(!liked)}
-      style={style.button}
+      style={[
+        localStyle.button,
+        props.horizontal && { flex: 1, width: "100%" },
+      ]}
       icon={renderIcon}
       iconColor={tint}
     />
   );
 };
 
-const style = StyleSheet.create({
-  button: {
-    height: "auto",
-  },
-  icon: {
-    marginTop: 12,
-  },
-  score: {
-    textAlign: "center",
-    fontWeight: "bold",
-    marginBottom: 8,
-  },
-});
+const style = (horizontal: boolean) =>
+  StyleSheet.create({
+    button: {
+      height: "auto",
+      margin: 0,
+    },
+    wrapper: {
+      display: "flex",
+      padding: horizontal ? 8 : 0,
+      alignItems: "center",
+      flexDirection: horizontal ? "row" : "column",
+    },
+    icon: {
+      marginTop: horizontal ? 0 : 12,
+      marginRight: horizontal ? 4 : 0,
+    },
+    score: {
+      textAlign: "center",
+      fontWeight: "bold",
+      marginBottom: horizontal ? 0 : 8,
+    },
+  });
