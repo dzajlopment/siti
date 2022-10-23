@@ -18,7 +18,7 @@ export const IdeasList = (props: IdeasListProps) => {
     <View
       style={{ height: "100%", alignItems: "center", justifyContent: "center" }}
     >
-      <Text variant="bodyLarge">No reports</Text>
+      <Text variant="bodyLarge">No submitted ideas</Text>
     </View>
   );
 

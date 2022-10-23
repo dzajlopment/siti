@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { DefaultTheme, IconButton, Text, Theme } from "react-native-paper";
 import LikeIconOutlined from "../../assets/icons/thumb_up_FILL0_wght400_GRAD0_opsz24.svg";
 import LikeIconFilled from "../../assets/icons/thumb_up_FILL1_wght400_GRAD0_opsz24.svg";
@@ -27,16 +27,14 @@ export const Voting = ({ theme = DefaultTheme, ...props }: VotingProps) => {
   );
 
   return (
-    <View>
-      <IconButton
-        mode="contained"
-        containerColor={backgroundColor}
-        onPress={() => onVoteChange(!liked)}
-        style={style.button}
-        icon={renderIcon}
-        iconColor={tint}
-      />
-    </View>
+    <IconButton
+      mode="contained"
+      containerColor={backgroundColor}
+      onPress={() => onVoteChange(!liked)}
+      style={style.button}
+      icon={renderIcon}
+      iconColor={tint}
+    />
   );
 };
 

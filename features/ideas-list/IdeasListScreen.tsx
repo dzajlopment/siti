@@ -1,4 +1,5 @@
 import { BACKEND_URL } from "@env";
+import { useIsFocused } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ export const IdeasListScreen = (props: {
     navigation.push("New Idea");
   };
 
-  useEffect(() => {
+  const fetchIdeas = () => {
     axios
       .get(`${BACKEND_URL}/api/v1/ideas`)
       .then((response) => {
@@ -30,6 +31,14 @@ export const IdeasListScreen = (props: {
         setError(error);
         setSnackbarVisible(true);
       });
+  };
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused) {
+      fetchIdeas();
+    }
   }, []);
 
   return (

@@ -15,6 +15,7 @@ export const IdeaListItem = (props: IdeaListItemProps) => {
 
   return (
     <List.Item
+      style={{ paddingLeft: 0 }}
       left={() => (
         <Voting liked={liked} onVoteChange={onVoteChange} score={score} />
       )}
