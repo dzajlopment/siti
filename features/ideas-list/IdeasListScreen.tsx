@@ -2,16 +2,16 @@ import { BACKEND_URL } from "@env";
 import { useIsFocused } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Snackbar } from "react-native-paper";
-import { Idea } from "../../types/Idea";
+import { Idea, IdeaStatus } from "../../types/Idea";
 import { IdeasList } from "./IdeasList";
 
 export const IdeasListScreen = (props: {
   navigation: NativeStackNavigationProp<any>;
 }) => {
   const navigation = props.navigation;
-  const [ideas, setIdeas] = useState<Idea[]>([]);
+  const [allIdeas, setAllIdeas] = useState<Idea[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [snackbarVisible, setSnackbarVisible] = useState<boolean>(false);
 
@@ -23,7 +23,7 @@ export const IdeasListScreen = (props: {
     axios
       .get(`${BACKEND_URL}/api/v1/ideas`)
       .then((response) => {
-        setIdeas(response.data.data);
+        setAllIdeas(response.data.data);
         setError(null);
         setSnackbarVisible(false);
       })
@@ -41,10 +41,17 @@ export const IdeasListScreen = (props: {
     }
   }, []);
 
+  const ideasToDisplay = useMemo(() => {
+    // Remove rejected ideas and sort descending by score
+    return allIdeas
+      .filter((idea: Idea) => idea.status !== IdeaStatus.Rejected)
+      .sort((a: Idea, b: Idea) => b.voting.score - a.voting.score);
+  }, [allIdeas]);
+
   return (
     <>
       <IdeasList
-        ideas={ideas}
+        ideas={ideasToDisplay}
         onIdeaPress={() => {}}
         onVoteChange={() => {}}
         onNewIdeaPress={handleNewIdeaPressed}
